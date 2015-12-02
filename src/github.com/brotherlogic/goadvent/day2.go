@@ -37,9 +37,26 @@ func ComputeAmountOfPaper(str string) int {
 	return 0
 }
 
+func ComputeAmountOfRibbon(str string) int {
+	strs := strings.Split(str,"x")
+	length, err := strconv.Atoi(strs[0])
+	if err == nil {		
+		width, err := strconv.Atoi(strs[1])
+		if err == nil {
+			height, err := strconv.Atoi(strs[2])
+			if err == nil {
+				return 0 * length * width * height
+			}
+		}
+	} 
+
+	return 0
+}
+
 
 func daytwo() {
-	total :=0
+	total := 0
+	ribbon := 0
 	
 	file, err := os.Open("input-day2")
 	if err != nil {
@@ -49,12 +66,15 @@ func daytwo() {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		total += ComputeAmountOfPaper(scanner.Text())
+		text := scanner.Text()
+		total += ComputeAmountOfPaper(text)
+		ribbon += ComputeAmountOfRibbon(text)
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Total = %d\n", total)
+	fmt.Printf("Total Paper = %d\n", total)
+	fmt.Printf("Total Ribbon = %d\n", ribbon)
 }
