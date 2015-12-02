@@ -7,8 +7,8 @@ func TestDay2P2(t *testing.T) {
 		in string
 		want int
 	} {
-		{"2x3x4", 0},
-		{"1x1x10", 0},
+		{"2x3x4", 34},
+		{"1x1x10", 14},
 	}
 
 	for _, c := range cases {
