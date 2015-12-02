@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 	"strconv"
 )
@@ -14,6 +15,14 @@ func Min(a int, b int) int {
 		return b
 	} else {
 		return a
+	}
+}
+
+func Max(a int, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
 	}
 }
 
@@ -45,7 +54,9 @@ func ComputeAmountOfRibbon(str string) int {
 		if err == nil {
 			height, err := strconv.Atoi(strs[2])
 			if err == nil {
-				return 0 * length * width * height
+				arr := []int {length, width, height}
+				sort.Ints(arr)
+				return arr[0]*2+arr[1]*2+length*width*height
 			}
 		}
 	} 
