@@ -1,1 +1,3 @@
 language: go
+script:
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then go install; fi
