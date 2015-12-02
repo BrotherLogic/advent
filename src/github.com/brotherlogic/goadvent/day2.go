@@ -56,5 +56,5 @@ func daytwo() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Total = %d", total)
+	fmt.Printf("Total = %d\n", total)
 }
