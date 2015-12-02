@@ -28,7 +28,7 @@ func ComputeF1(str string) int {
 }
 
 func dayone() {
-	buf, err := ioutil.ReadFile("input")
+	buf, err := ioutil.ReadFile("input-day1")
 	if err == nil {
 		answer := ComputeFloor(string(buf))
 		floor := ComputeF1(string(buf))
