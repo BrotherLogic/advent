@@ -7,7 +7,6 @@ import "fmt"
 func ComputeFloor(str string) int {
 	left := strings.Count(str, "(")
 	right := strings.Count(str, ")")
-	fmt.Printf("Found %d,%d\n", left, right)
 	return left - right
 }
 
@@ -28,7 +27,7 @@ func ComputeF1(str string) int {
 	return -1
 }
 
-func main() {
+func dayone() {
 	buf, err := ioutil.ReadFile("input")
 	if err == nil {
 		answer := ComputeFloor(string(buf))
