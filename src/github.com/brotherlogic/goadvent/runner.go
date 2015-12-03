@@ -6,8 +6,10 @@ func main() {
 	fmt.Println("Day One")
 	fmt.Println("-------")
 	dayone()
-	fmt.Println("Day Two")
+	fmt.Println("\nDay Two")
 	fmt.Println("-------")
 	daytwo()
-
+	fmt.Println("\nDay Three")
+	fmt.Println("-------")
+	daythree()
 }
