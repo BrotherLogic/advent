@@ -4,6 +4,10 @@ import "io/ioutil"
 import "fmt"
 import "strconv"
 
+func ComputeNumberOfRoboHouses(str string) int {
+	return 0
+}
+
 func ComputeNumberOfHouses(str string) int {
 	x := 0
 	y := 0
@@ -37,7 +41,9 @@ func daythree() {
 	buf, err := ioutil.ReadFile("input-day3")
 	if err == nil {
 		answer := ComputeNumberOfHouses(string(buf))
+		roboanswer := ComputeNumberOfRoboHouses(string(buf))
 		fmt.Printf("Number of Houses = %d\n", answer)
+		fmt.Printf("Number of RoboHouses = %d\n", roboanswer)
 	} else {
 		panic(err)
 	}
