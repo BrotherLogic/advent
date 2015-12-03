@@ -8,9 +8,9 @@ func TestDay3P1(t *testing.T) {
 		in string
 		want int
 	} {
-		{">", 0},
-		{"^>v<", 0},
-		{"^v^v^v^v^v", 0},
+		{">", 2},
+		{"^>v<", 4},
+		{"^v^v^v^v^v", 2},
 	}
 
 	for _, c := range cases {
