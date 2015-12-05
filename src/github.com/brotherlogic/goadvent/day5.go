@@ -71,7 +71,6 @@ func RepeatWithMiddle(str string) bool {
 }
 
 func IsNiceAlso(str string) bool {
-	fmt.Printf("%q = %d, %t\n",str,CountMaxNonOverlapping(str),RepeatWithMiddle(str))
 	return CountMaxNonOverlapping(str) >= 2 && RepeatWithMiddle(str)
 }
 
