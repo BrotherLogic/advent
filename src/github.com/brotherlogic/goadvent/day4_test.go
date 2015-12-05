@@ -8,8 +8,8 @@ func TestDay4P1(t *testing.T) {
 		in string
 		want int
 	} {
-		{"abcdef", 0},
-		{"pqrstuv", 0},
+		{"abcdef", 609043},
+		{"pqrstuv", 1048970},
 	}
 
 	for _, c := range cases {
