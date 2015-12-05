@@ -101,8 +101,6 @@ func dayfive() {
 		}
 		if IsNiceAlso(text) {
 			also_nice++
-		} else {
-			fmt.Printf("Fail = %q; %d,%t\n",text, CountMaxNonOverlapping(text), RepeatWithMiddle(text))
 		}
 	}
 
