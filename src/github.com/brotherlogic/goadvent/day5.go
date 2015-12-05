@@ -35,6 +35,18 @@ func CountRow(str string) int {
 	return best
 }
 
+func CountMaxNonOverlapping(str string) int {
+	return 100
+}
+
+func RepeatWithMiddle(str string) bool {
+	return true
+}
+
+func IsNiceAlso(str string) bool {
+	return CountMaxNonOverlapping(str) >= 2 && RepeatWithMiddle(str)
+}
+
 func IsNice(str string) bool {
 	bad_str := []string{"ab","cd","pq","xy"}
 	for i := 0 ; i < len(bad_str) ; i++ {
@@ -56,10 +68,14 @@ func dayfive() {
 	
 	scanner := bufio.NewScanner(file)
 	nice := 0
+	also_nice := 0
 	for scanner.Scan() {
 		text := scanner.Text()
 		if IsNice(text) {
-			nice++;
+			nice++
+		}
+		if IsNiceAlso(text) {
+			also_nice++
 		}
 	}
 
@@ -68,4 +84,5 @@ func dayfive() {
 	}
 	
 	fmt.Printf("Nice = %d\n",nice)
+	fmt.Printf("Also Nice = %d\n",also_nice)
 }
