@@ -40,15 +40,13 @@ func CountMaxNonOverlapping(str string) int {
 	for i := 0 ; i < len(str) -1; i++ {
 		pair := string(str[i:i+2])
 		safe := true
-		if str[i] == str[i+1] {
-			if i > 0 && str[i] == str[i-1] {
-				safe = false
-			}
-			if i < len(str)-2 && str[i] == str[i+2] {
-				safe = false
+
+		if i < len(str)-2 {
+			if  str[i] == str[i+1] && str[i+1] == str[i+2] {
+				i++
 			}
 		}
-
+		
 		if safe {
 			counts[pair]++
 		}
@@ -103,6 +101,8 @@ func dayfive() {
 		}
 		if IsNiceAlso(text) {
 			also_nice++
+		} else {
+			fmt.Printf("Fail = %q; %d,%t\n",text, CountMaxNonOverlapping(text), RepeatWithMiddle(text))
 		}
 	}
 
