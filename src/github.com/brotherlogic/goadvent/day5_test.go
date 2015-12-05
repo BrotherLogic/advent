@@ -10,15 +10,15 @@ func TestDay5P1(t *testing.T) {
 	} {
 		{"ugknbfddgicrmopn", true},
 		{"aaa", true},
-		{"jchzalrnumimnmhp", true},
-		{"haegwjzuvuyypxyu", true},
-		{"dvszwmarrgswjxmb", true},
+		{"jchzalrnumimnmhp", false},
+		{"haegwjzuvuyypxyu", false},
+		{"dvszwmarrgswjxmb", false},
 	}
 
 	for _, c := range cases {
 		got := IsNice(c.in)
 		if got != c.want {
-			t.Errorf("Spec(%q) == %d, want %d", c.in, got, c.want)
+			t.Errorf("Spec(%q) == %t, want %t", c.in, got, c.want)
 		}
 	}
 }
