@@ -39,7 +39,6 @@ func IsNice(str string) bool {
 	bad_str := []string{"ab","cd","pq","xy"}
 	for i := 0 ; i < len(bad_str) ; i++ {
 		if strings.Contains(str,bad_str[i]) {
-			fmt.Printf("%q contains bad\n",str)
 			return false
 		}
 	}
@@ -49,12 +48,12 @@ func IsNice(str string) bool {
 }
 
 func dayfive() {
-	file, err := os.Open("input-day2")
+	file, err := os.Open("input-day5")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
-
+	
 	scanner := bufio.NewScanner(file)
 	nice := 0
 	for scanner.Scan() {
@@ -64,5 +63,9 @@ func dayfive() {
 		}
 	}
 
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+	
 	fmt.Printf("Nice = %d\n",nice)
 }
