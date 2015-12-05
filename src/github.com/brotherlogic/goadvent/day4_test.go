@@ -13,7 +13,7 @@ func TestDay4P1(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := SolveHash(c.in)
+		got := SolveHash(c.in, 5)
 		if got != c.want {
 			t.Errorf("Spec(%q) == %d, want %d", c.in, got, c.want)
 		}
