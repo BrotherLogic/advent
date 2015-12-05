@@ -10,8 +10,9 @@ func TestDay5P2(t *testing.T) {
 	} {
 		{"qjhvhtzxzqqjkmpb", true},
 		{"xxyxx", true},
-		{"uurcxstgmygtbstg", true},
-		{"ieodomkazucvgmuy", true},
+		{"xyxaaabgaa", false},
+		{"uurcxstgmygtbstg", false},
+		{"ieodomkazucvgmuy", false},
 	}
 
 	for _, c := range cases {

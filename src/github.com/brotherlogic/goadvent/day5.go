@@ -36,14 +36,42 @@ func CountRow(str string) int {
 }
 
 func CountMaxNonOverlapping(str string) int {
-	return 100
+	counts := make(map[string]int)
+	for i := 0 ; i < len(str) -1; i++ {
+		pair := string(str[i:i+2])
+		safe := true
+		if str[i] == str[i+1] {
+			if i > 0 && str[i] == str[i-1] {
+				safe = false
+			}
+			if i < len(str)-2 && str[i] == str[i+2] {
+				safe = false
+			}
+		}
+
+		if safe {
+			counts[pair]++
+		}
+	}
+
+	max_v := 0
+	for _, value := range counts {
+		max_v = Max(value,max_v)
+	}
+	return max_v
 }
 
 func RepeatWithMiddle(str string) bool {
-	return true
+	for i := 0 ; i < len(str)-2 ; i++ {
+		if str[i] == str[i+2] {
+			return true
+		}
+	}
+	return false
 }
 
 func IsNiceAlso(str string) bool {
+	fmt.Printf("%q = %d, %t\n",str,CountMaxNonOverlapping(str),RepeatWithMiddle(str))
 	return CountMaxNonOverlapping(str) >= 2 && RepeatWithMiddle(str)
 }
 
