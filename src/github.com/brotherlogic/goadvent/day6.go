@@ -4,8 +4,40 @@ import "bufio"
 import "fmt"
 import "log"
 import "os"
+import "regexp"
+import "strconv"
+import "strings"
 
 func ToggleLights (str string, arr [][]bool) [][]bool {
+	command := "on"
+	if strings.Contains(str,"off") {
+		command = "off"
+	} else if strings.Contains(str,"toggle") {
+		command = "toggle"
+	}
+
+	re := regexp.MustCompile(`(\d+),(\d+) through (\d+),(\d+)`)
+	result := re.FindAllStringSubmatch(str,-1)
+
+	x1,err := strconv.Atoi(result[0][1])
+	y1,err := strconv.Atoi(result[0][2])
+	x2,err := strconv.Atoi(result[0][3])
+	y2,err := strconv.Atoi(result[0][4])
+
+	if err != nil {
+		panic("Halp")
+	}
+	
+	for x := x1 ; x <= x2 ; x++ {
+		for y := y1; y <= y2 ; y++ {
+			switch(command) {
+			case "on": arr[x][y] = true
+			case "off": arr[x][y] = false
+			case "toggle": arr[x][y] = !arr[x][y]
+			}
+		}
+	}
+	
 	return arr
 }
 
