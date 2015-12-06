@@ -8,8 +8,8 @@ func TestDay6P2(t *testing.T) {
 		in string
 		want int
 	} {
-		{"turn on 0,0 through 0,0", 0},
-		{"turn on 0,0 through 999,999", 0},
+		{"turn on 0,0 through 0,0", 1},
+		{"toggle 0,0 through 999,999", 2000000},
 	}
 
 	for _, c := range cases {
