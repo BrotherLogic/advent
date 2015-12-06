@@ -64,9 +64,9 @@ func ToggleBrightness (str string, arr [][]int) [][]int {
 	for x := x1 ; x <= x2 ; x++ {
 		for y := y1; y <= y2 ; y++ {
 			switch(command) {
-			case "on": arr[x][y] = 0
-			case "off": arr[x][y] = 0
-			case "toggle": arr[x][y] = 0
+			case "on": arr[x][y] += 1
+			case "off": arr[x][y] = Max(0, arr[x][y]-1)
+			case "toggle": arr[x][y] += 2
 			}
 		}
 	}
