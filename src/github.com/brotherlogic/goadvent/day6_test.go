@@ -2,6 +2,40 @@ package main
 
 import "testing"
 
+func TestDay6P2(t *testing.T) {
+
+	cases := []struct {
+		in string
+		want int
+	} {
+		{"turn on 0,0 through 0,0", 0},
+		{"turn on 0,0 through 999,999", 0},
+	}
+
+	for _, c := range cases {
+		lights := MakeBrightBoard(1000)
+		lights = ToggleBrightness(c.in, lights)
+
+		count := 0
+		size := 0
+		for i := 0 ; i < len(lights) ; i++ {
+			for j := 0 ; j < len(lights[i]) ; j++ {
+				size++
+				count += lights[i][j]
+			}
+		}
+		
+		if count != c.want {
+			t.Errorf("Spec(%q) == %d, want %d", c.in, count, c.want)
+		}
+
+		if size != 1000*1000 {
+			t.Errorf("Size is %d, should be %d", size, 1000*1000)
+		}
+	}
+}
+
+
 func TestDay6P1(t *testing.T) {
 
 	cases := []struct {
