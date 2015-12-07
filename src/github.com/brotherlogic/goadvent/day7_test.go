@@ -8,14 +8,14 @@ func TestDay7P1(t *testing.T) {
 		in string
 		want int
 	} {
-		{"d",0},
-		{"e",0},
-		{"f",0},
-		{"g",0},
-		{"h",0},
-		{"i",0},
-		{"x",0},
-		{"y",0},
+		{"d",72},
+		{"e",507},
+		{"f",492},
+		{"g",114},
+		{"h",65412},
+		{"i",65079},
+		{"x",123},
+		{"y",456},
 	}
 
 	var rules map[string]string
