@@ -15,7 +15,7 @@ func TestDay7P1(t *testing.T) {
 		{"h",65412},
 		{"i",65079},
 		{"x",123},
-		{"y",476},
+		{"y",456},
 	}
 
 	var rules map[string]string
