@@ -5,10 +5,61 @@ import "fmt"
 import "log"
 import "os"
 import "regexp"
+import "strconv"
+import "strings"
 
 
 func WorkRules(rules map[string]string, key string) int{
-	return 0	
+	response := rules[key]
+
+	if strings.Contains(response, "AND") {
+		parts := strings.Split(response, " AND ")
+		val1 := WorkRules(rules, parts[0])
+		val2 := WorkRules(rules, parts[1])
+		return val1 & val2
+	}
+
+	if strings.Contains(response, "OR") {
+		parts := strings.Split(response, " OR ")
+		val1 := WorkRules(rules, parts[0])
+		val2 := WorkRules(rules, parts[1])
+		return val1 | val2
+	}
+	
+	if strings.Contains(response, "LSHIFT") {
+		parts := strings.Split(response, " LSHIFT ")
+		val1 := WorkRules(rules, parts[0])
+		val2,_ := strconv.Atoi(parts[1])
+		return val1 << uint8(val2)
+	}
+
+	if strings.Contains(response, "RSHIFT") {
+		parts := strings.Split(response, " RSHIFT ")
+		val1 := WorkRules(rules, parts[0])
+		val2,_ := strconv.Atoi(parts[1])
+		return val1 >> uint8(val2)
+	}
+
+	if strings.Contains(response, "OR") {
+		parts := strings.Split(response, " OR ")
+		val1 := WorkRules(rules, parts[0])
+		val2 := WorkRules(rules, parts[1])
+		return val1 | val2
+	}
+	
+	if strings.Contains(response, "NOT") {
+		parts := strings.Split(response, "NOT ")
+		val1 := uint16(WorkRules(rules, parts[1]))
+		return int(^val1)
+	}
+
+	m, err := regexp.MatchString(`\d+`, response)
+	if  err == nil && m {
+		conv, _ := strconv.Atoi(response)
+		return conv
+	}
+	
+	return 0
 }
 
 
