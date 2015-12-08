@@ -81,7 +81,9 @@ func WorkRules(rules map[string]string, key string) int{
 func dayseven() {
 	re := regexp.MustCompile(`(.*) -> (.*)`)
 	var rules map[string]string
+	var rules2 map[string]string
 	rules = make(map[string]string)
+	rules2 = make(map[string]string)
 	
 	file, err := os.Open("input-day7")
 	if err != nil {
@@ -94,11 +96,14 @@ func dayseven() {
 		text := scanner.Text()
 		result := re.FindAllStringSubmatch(text,-1)
 		rules[result[0][2]] = result[0][1]
+		rules2[result[0][2]] = result[0][1]
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 	
-	fmt.Printf("'a' = %d\n", WorkRules(rules, "a"))
+	fmt.Printf("'a'  = %d\n", WorkRules(rules, "a"))
+	rules2["b"] = rules["a"]
+	fmt.Printf("'a'2 = %d\n", WorkRules(rules, "a"))
 }
