@@ -102,8 +102,8 @@ func dayseven() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	
+
 	fmt.Printf("'a'  = %d\n", WorkRules(rules, "a"))
-	rules2["b"] = rules["a"]
-	fmt.Printf("'a'2 = %d\n", WorkRules(rules, "a"))
+	rules2["b"] = strconv.Itoa(WorkRules(rules, "a"))
+	fmt.Printf("'a'2 = %d\n", WorkRules(rules2, "a"))
 }
