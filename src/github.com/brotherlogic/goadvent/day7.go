@@ -10,12 +10,21 @@ import "strings"
 
 
 func WorkRules(rules map[string]string, key string) int{
+	
 	response := rules[key]
 
+	if response == "" {
+		response = key
+	}
+	
 	if strings.Contains(response, "AND") {
 		parts := strings.Split(response, " AND ")
 		val1 := WorkRules(rules, parts[0])
 		val2 := WorkRules(rules, parts[1])
+
+		rules[parts[0]] = strconv.Itoa(val1)
+		rules[parts[1]] = strconv.Itoa(val2)
+		
 		return val1 & val2
 	}
 
@@ -23,6 +32,10 @@ func WorkRules(rules map[string]string, key string) int{
 		parts := strings.Split(response, " OR ")
 		val1 := WorkRules(rules, parts[0])
 		val2 := WorkRules(rules, parts[1])
+
+		rules[parts[0]] = strconv.Itoa(val1)
+		rules[parts[1]] = strconv.Itoa(val2)
+		
 		return val1 | val2
 	}
 	
@@ -30,6 +43,9 @@ func WorkRules(rules map[string]string, key string) int{
 		parts := strings.Split(response, " LSHIFT ")
 		val1 := WorkRules(rules, parts[0])
 		val2,_ := strconv.Atoi(parts[1])
+
+		rules[parts[0]] = strconv.Itoa(val1)
+		
 		return val1 << uint8(val2)
 	}
 
@@ -37,19 +53,18 @@ func WorkRules(rules map[string]string, key string) int{
 		parts := strings.Split(response, " RSHIFT ")
 		val1 := WorkRules(rules, parts[0])
 		val2,_ := strconv.Atoi(parts[1])
-		return val1 >> uint8(val2)
-	}
 
-	if strings.Contains(response, "OR") {
-		parts := strings.Split(response, " OR ")
-		val1 := WorkRules(rules, parts[0])
-		val2 := WorkRules(rules, parts[1])
-		return val1 | val2
+		rules[parts[0]] = strconv.Itoa(val1)
+		
+		return val1 >> uint8(val2)
 	}
 	
 	if strings.Contains(response, "NOT") {
 		parts := strings.Split(response, "NOT ")
 		val1 := uint16(WorkRules(rules, parts[1]))
+
+		rules[parts[0]] = strconv.Itoa(int(val1))
+		
 		return int(^val1)
 	}
 
@@ -59,7 +74,7 @@ func WorkRules(rules map[string]string, key string) int{
 		return conv
 	}
 	
-	return 0
+	return WorkRules(rules, response)
 }
 
 

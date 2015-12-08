@@ -14,6 +14,8 @@ func TestDay7P1(t *testing.T) {
 		{"g",114},
 		{"h",65412},
 		{"i",65079},
+		{"j",123},
+		{"lj",123},
 		{"x",123},
 		{"y",456},
 	}
@@ -29,6 +31,9 @@ func TestDay7P1(t *testing.T) {
 	rules["g"] = "y RSHIFT 2"
 	rules["h"] = "NOT x"
 	rules["i"] = "NOT y"
+	rules["j"] = "x"
+	rules["lj"] = "ky"
+	rules["ky"] = "x"
 
 	for _, c := range cases {
 		answer := WorkRules(rules, c.in)
