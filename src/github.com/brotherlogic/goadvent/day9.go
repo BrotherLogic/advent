@@ -4,6 +4,8 @@ import "bufio"
 import "fmt"
 import "log"
 import "os"
+import "regexp"
+import "strconv"
 
 type MapEntry struct {
 	remaining[] int
@@ -21,7 +23,6 @@ func Sum(arr[] int) int{
 }
 
 func SearchTree(root MapEntry) int {
-	fmt.Printf("NUM = %v\n", root)
 	if len(root.children) == 0 {
 		return root.distance
 	} else {
@@ -33,8 +34,20 @@ func SearchTree(root MapEntry) int {
 	}
 }
 
+func SearchTreeMax(root MapEntry) int {
+	if len(root.children) == 0 {
+		return root.distance
+	} else {
+		best := SearchTree(root.children[0])
+		for i := 1 ; i < len(root.children) ; i++ {
+			best = Max(best, SearchTreeMax(root.children[i]))
+		}
+		return best
+	}
+}
+
+
 func BuildTree(root MapEntry, arr [][]int) MapEntry {
-	fmt.Printf("BUILDING = %v with %v\n", root, arr)
 	if root.location == -1 {
 		root.children = make([]MapEntry, len(arr))
 		for i := 0 ; i < len(arr) ; i++ {
@@ -83,7 +96,27 @@ func SearchMap(arr [][]int) int {
 	return SearchTree(p)
 }
 
+func SearchMapMax(arr [][]int) int {
+	// Build out a tree structure
+	var p MapEntry
+	p.remaining = make([]int, len(arr))
+	p.distance = 0
+	p.location = -1
+
+	p = BuildTree(p,arr)	
+	return SearchTreeMax(p)
+}
+
+
 func daynine() {
+
+	m := regexp.MustCompile(` = (\d*)`)
+	
+	arr := [][]int {}
+	for i := 0 ; i < 8 ; i++ {
+		row := make([]int,8)
+		arr = append(arr,row)
+	}
 	
 	file, err := os.Open("input-day9")
 	if err != nil {
@@ -92,12 +125,24 @@ func daynine() {
 	defer file.Close()
 	
 	scanner := bufio.NewScanner(file)
+	x := 1
+	y := 0
 	for scanner.Scan() {
 		text := scanner.Text()
-		fmt.Printf("%q\n",text)
+		result := m.FindAllStringSubmatch(text,-1)
+		arr[x][y],_ = strconv.Atoi(result[0][1])
+		arr[y][x] = arr[x][y]
+		x++
+		if x > 7 {
+			y++
+			x = y+1
+		}
 	}
-
+	
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Printf("Answer = %d\n", SearchMap(arr))
+	fmt.Printf("Answer2 = %d\n", SearchMapMax(arr))
 }

@@ -18,8 +18,13 @@ func TestDay9P1(t *testing.T) {
 	arr[2][1] = 141
 	
 	answer := SearchMap(arr)
-		
+	answer2 := SearchMapMax(arr)
+	
 	if answer != 605 {
 		t.Errorf("%d, want %d", answer, 605)
+	}
+
+	if answer2 != 982 {
+		t.Errorf("%d, want %d", answer2, 982)
 	}
 }
