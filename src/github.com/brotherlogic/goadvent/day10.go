@@ -1,16 +1,17 @@
 package main
 
+import "bytes"
 import "fmt"
 import "strconv"
 
 func LookAndSay(str string) string {
-	newstr := ""
+	var newstr bytes.Buffer
 	curr_char := str[0]
 	curr_count := 1
 
 	for i := 1; i < len(str); i++ {
 		if str[i] != curr_char {
-			newstr += strconv.Itoa(curr_count) + string(curr_char)
+			newstr.WriteString(strconv.Itoa(curr_count) + string(curr_char))
 			curr_char = str[i]
 			curr_count = 1
 		} else {
@@ -18,8 +19,8 @@ func LookAndSay(str string) string {
 		}
 	}
 
-	newstr += strconv.Itoa(curr_count) + string(curr_char)
-	return newstr
+	newstr.WriteString(strconv.Itoa(curr_count) + string(curr_char))
+	return newstr.String()
 }
 
 func LookApply(str string, count int) string {
