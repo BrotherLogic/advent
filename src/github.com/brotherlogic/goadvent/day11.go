@@ -66,5 +66,6 @@ func NewPassword(str string) string {
 
 func dayeleven() {
 	init := "hxbxwxba"	
-	fmt.Printf("Part 1 = %d\n", NewPassword(init))
+	fmt.Printf("Part 1 = %q\n", NewPassword(init))
+	fmt.Printf("Part 2 = %q\n", NewPassword(NewPassword(init)))
 }
