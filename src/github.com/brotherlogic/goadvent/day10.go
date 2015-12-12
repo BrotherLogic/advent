@@ -32,4 +32,5 @@ func LookApply(str string, count int) string {
 func dayten() {
 	init := "1321131112"	
 	fmt.Printf("Part 1 = %d\n", len(LookApply(init, 40)))
+	fmt.Printf("Part 2 = %d\n", len(LookApply(init, 50)))
 }
