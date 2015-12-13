@@ -38,7 +38,6 @@ func ProcJsonObject(dec *json.Decoder) (float64, bool) {
 		if v,ok := t.(json.Delim); ok {
 			if v.String() == "{" {
 				ncount,seen := ProcJsonObject(dec)
-				fmt.Printf("Read object, %v, %v\n", ncount, seen)
 				if !seen {
 					count += ncount
 				}
@@ -72,7 +71,7 @@ func ProcJsonObject(dec *json.Decoder) (float64, bool) {
 func ProcJsonStringNoRed(dec *json.Decoder) int {
 	count, seen := ProcJsonObject(dec)
 	if seen {
-		return 0
+		return int(count)
 	}
 	return int(count)
 }
@@ -80,12 +79,14 @@ func ProcJsonStringNoRed(dec *json.Decoder) int {
 
 func daytwelve() {
 	file, e := os.Open("input-day12")
+	file2, e := os.Open("input-day12")
 	if e != nil {
 		fmt.Printf("File error: %v\n", e)
 		os.Exit(1)
 	}
 
 	dec := json.NewDecoder(file)
+	dec2 := json.NewDecoder(file2)
 	fmt.Printf("Totat = %d\n", ProcJsonString(dec))
-	fmt.Printf("Totat = %d\n", ProcJsonStringNoRed(dec))
+	fmt.Printf("Totat = %d\n", ProcJsonStringNoRed(dec2))
 }
