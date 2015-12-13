@@ -26,24 +26,54 @@ func ProcJsonString(dec *json.Decoder) int {
 	return int(count)
 }
 
-func ProcJsonStringNoRed(dec *json.Decoder) int {
+func ProcJsonObject(dec *json.Decoder) (float64, bool) {
 	count := 0.0
+	seen_red := false
 	for {
-		t, err := dec.Token()
-		
-		if err == io.EOF {
+		t,err := dec.Token()
+		if err == io.EOF || t == nil{
 			break
 		}
 
+		if v,ok := t.(json.Delim); ok {
+			if v.String() == "{" {
+				ncount,seen := ProcJsonObject(dec)
+				fmt.Printf("Read object, %v, %v\n", ncount, seen)
+				if !seen {
+					count += ncount
+				}
+			} else if v.String() == "}" {
+				return count,seen_red
+			} else if v.String() == "[" {
+				ncount,_ := ProcJsonObject(dec)
+				count += ncount
+			} else if v.String() == "]" {
+				return count,seen_red
+			}
+		}
+
+		if v,ok := t.(string); ok {
+			if v == "red" {
+				seen_red = true
+			}
+		}
+
+		
 		if v, ok := t.(float64); ok {
 			count += v
 		}
+
 		
-		if t == nil {
-			break
-		}
 	}
 
+	return count, seen_red
+}
+
+func ProcJsonStringNoRed(dec *json.Decoder) int {
+	count, seen := ProcJsonObject(dec)
+	if seen {
+		return 0
+	}
 	return int(count)
 }
 
