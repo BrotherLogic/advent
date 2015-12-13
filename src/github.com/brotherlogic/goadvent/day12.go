@@ -17,7 +17,9 @@ func ProcJsonString(dec *json.Decoder) int {
 		if v, ok := t.(float64); ok {
 			count += v
 		}
-
+		
+		fmt.Printf("Skipping %v\n", t)
+		
 		if t == nil {
 			break
 		}
