@@ -27,3 +27,23 @@ func TestDay12P1(t *testing.T) {
 		}
 	}
 }
+
+func TestDay12P2(t *testing.T) {
+
+	cases := []struct {
+		in string
+		want int
+	} {
+		{"[1,2,3]", 6},
+		{"[1,{\"c\":\"red\",\"b\":2},3]", 4},
+		{"{\"d\":\"red\",\"e\":[1,2,3,4],\"f\":5}", 0},
+		{"[1,\"red\",5]", 6},
+	}
+
+	for _, c := range cases {
+		answer := ProcJsonStringNoRed(json.NewDecoder(strings.NewReader(c.in)))
+		if answer != c.want {
+			t.Errorf("Spec(%q) == %d, want %d", c.in, answer, c.want)
+		}
+	}
+}
