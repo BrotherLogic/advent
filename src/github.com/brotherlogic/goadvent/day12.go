@@ -34,5 +34,5 @@ func daytwelve() {
 	}
 
 	dec := json.NewDecoder(file)
-	fmt.Printf("Totatl = %d", ProcJsonString(dec))
+	fmt.Printf("Totat = %d\n", ProcJsonString(dec))
 }
