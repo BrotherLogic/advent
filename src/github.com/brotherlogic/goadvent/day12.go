@@ -9,12 +9,17 @@ func ProcJsonString(dec *json.Decoder) int {
 	count := 0.0
 	for {
 		t, err := dec.Token()
+		
 		if err == io.EOF {
 			break
 		}
 
 		if v, ok := t.(float64); ok {
 			count += v
+		}
+
+		if t == nil {
+			break
 		}
 	}
 
