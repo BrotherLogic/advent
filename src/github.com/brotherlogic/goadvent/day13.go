@@ -15,7 +15,6 @@ func Compute(tocheck []int, valarr [][]int) int {
 	}
 
 	count += valarr[tocheck[0]][tocheck[len(tocheck)-1]] + valarr[tocheck[len(tocheck)-1]][tocheck[0]]
-	fmt.Printf("Checking %v = %v\n", tocheck, count)
 	return count
 }
 
