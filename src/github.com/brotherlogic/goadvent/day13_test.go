@@ -16,7 +16,7 @@ func TestDay13P1(t *testing. T) {
 		"David would gain 46 happiness units by sitting next to Alice.",
 		"David would lose 7 happiness units by sitting next to Bob.",
 		"David would gain 41 happiness units by sitting next to Carol."}
-	if ProcSeatingArray(arr) != 330 {
-		t.Errorf("Mismatch in computation %d != 330\n",ProcSeatingArray(arr))
+	if ProcSeatingArray(arr,0) != 330 {
+		t.Errorf("Mismatch in computation %d != 330\n",ProcSeatingArray(arr,0))
 	}
 }

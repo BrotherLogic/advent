@@ -46,8 +46,8 @@ func ProcValues(arr [][]int) int {
 	return MinPermutation(tobuild, toadd, arr)
 }
 
-func ProcSeatingArray(arr []string) int {
-	num := int((1 + math.Sqrt(float64(1+4*len(arr))))/2)
+func ProcSeatingArray(arr []string, add int) int {
+	num := int((1 + math.Sqrt(float64(1+4*len(arr))))/2) + add
 	narr := [][]int {}
 	for i := 0 ; i < num ; i++ {
 		row := make([]int, num)
@@ -84,6 +84,8 @@ func ProcSeatingArray(arr []string) int {
 	return ProcValues(narr)
 }
 
+
+
 func daythirteen() {
 	file,_ := os.Open("input-day13")
 	list := list.New()
@@ -98,5 +100,6 @@ func daythirteen() {
 		arr[count] = e.Value.(string)
 		count++
 	}
-	fmt.Printf("Best = %d\n", ProcSeatingArray(arr))
+	fmt.Printf("Best = %d\n", ProcSeatingArray(arr,0))
+	fmt.Printf("Best = %d\n", ProcSeatingArray(arr,1))
 }
