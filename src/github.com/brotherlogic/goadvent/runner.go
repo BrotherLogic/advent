@@ -48,5 +48,8 @@ func main() {
 	fmt.Println("\nDay Fifteen")
 	fmt.Println("--------")
 	dayfifteen()
+	fmt.Println("\nDay Sixteen")
+	fmt.Println("--------")
+	daysixteen()
 
 }
