@@ -10,4 +10,8 @@ func TestDay17oP1(t *testing.T) {
 		fmt.Printf("Done\n")
 		t.Errorf("Wrong Compute %v\n", ComputeAllPerms(arr,25))
 	}
+
+	if FindTheMin(arr,25) != 3 {
+		t.Errorf("Wrong Min %v\n", FindTheMin(arr,25))
+	}
 }
