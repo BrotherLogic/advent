@@ -44,5 +44,5 @@ func dayseventeen() {
 		val,_ := strconv.Atoi(text)
 		arr = append(arr, val)
 	}
-	fmt.Printf("Answer = %v\n", arr)
+	fmt.Printf("Answer = %v\n", ComputeAllPerms(arr,150))
 }
