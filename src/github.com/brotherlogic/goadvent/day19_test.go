@@ -10,7 +10,10 @@ func TestDay19P1(t *testing.T) {
 	tester["H"] = append(tester["H"],"OH")
 	tester["O"] = make([]string,0)
 	tester["O"] = append(tester["O"],"HH")
-
+	tester["e"] = make([]string,0)
+	tester["e"] = append(tester["e"],"H")
+	tester["e"] = append(tester["e"],"O")
+	
 	mapping := BuildMapping(tester, 0, "HOH")
 	if len(mapping) != 4 {
 		t.Errorf("Poor mapping %v\n", mapping)
@@ -19,5 +22,15 @@ func TestDay19P1(t *testing.T) {
 	mapping2 := BuildMapping(tester, 0, "HOHOHO")
 	if len(mapping2) != 7 {
 		t.Errorf("Poor second mapping %v,%v\n", len(mapping2), mapping2)
+	}
+
+	min_steps1 := ReverseMapping(tester,"HOH")
+	if min_steps1 != 3 {
+		t.Errorf("Bad mapping %v\n", min_steps1)
+	}
+
+	min_steps2 := ReverseMapping(tester,"HOHOHO")
+	if min_steps2 != 6 {
+		t.Errorf("Bad mapping 2 %v\n", min_steps2)
 	}
 }
