@@ -5,15 +5,26 @@ import "fmt"
 import "os"
 import "strings"
 
-func BuildMapping(mapper map[string][]string, pointer int, input string, sofar string) map[string]int {
+func Add(mapper map[string]int, str string) map[string]int {
+	if _, ok := mapper[str]; ok {
+		mapper[str] += 1
+	} else {
+		mapper[str] = 1
+	}
+
+	return mapper
+}
+
+func BuildMapping(mapper map[string][]string, pointer int, input string) map[string]int {
+	
 	var found map[string]int
 	found = make(map[string]int)
 	if pointer >= len(input) {
-		found[sofar] = 1
 		return found
 	}
 	
 	char := ""
+	
 	if pointer < len(input)-1 && strings.ToLower(input[pointer+1:pointer+2]) == input[pointer+1:pointer+2] {
 		char = input[pointer:pointer+2]
 	} else {
@@ -22,20 +33,17 @@ func BuildMapping(mapper map[string][]string, pointer int, input string, sofar s
 
 	if val, ok := mapper[char]; ok {
 		for i := 0 ; i < len(val) ; i++ {
-			nsofar := sofar+val[i]
-			nmap := BuildMapping(mapper, pointer+len(char), input, nsofar)
-			for k, v := range nmap {
-				found[k] += v
-			}
-		}
-	} else {
-		nsofar := sofar+char
-		nmap := BuildMapping(mapper, pointer+len(char), input, nsofar)
-		for k, v := range nmap {
-			found[k] += v
+			nstring := input[0:pointer] + val[i] + input[pointer+len(char):len(input)]		
+			Add(found,nstring)
 		}
 	}
-
+	
+	nmap := BuildMapping(mapper, pointer+len(char), input)
+	for k, v := range nmap {
+		found[k] += v
+	}
+	
+	
 	return found
 }
 
@@ -59,7 +67,7 @@ func daynineteen() {
 				mapper[t1] = append(mapper[t1],t2)
 			}
 		} else if len(text) > 2 {
-			fmt.Printf("Answer = %v\n", BuildMapping(mapper, 0, text, ""))
+			fmt.Printf("Answer = %v\n", len(BuildMapping(mapper, 0, text)))
 		}
 	}
 }
