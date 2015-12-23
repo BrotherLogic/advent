@@ -74,9 +74,21 @@ func dayeighteen() {
 		arr = append(arr, text)
 	}
 	initArr := BuildArr(arr)
-
+	initArr2 := BuildArr(arr)
+	initArr2[0][0] = true
+	initArr2[0][len(initArr2)-1] = true
+	initArr2[len(initArr2)-1][0] = true
+	initArr2[len(initArr2)-1][len(initArr2)-1] = true
+	
 	for i:= 0 ; i < 100 ; i++ {
 		initArr = Iterate(initArr)
+		initArr2 = Iterate(initArr2)
+		initArr2[0][0] = true
+		initArr2[0][len(initArr2)-1] = true
+		initArr2[len(initArr2)-1][0] = true
+		initArr2[len(initArr2)-1][len(initArr2)-1] = true
+
 	}
 	fmt.Printf("Lights (100) = %v\n",CountArr(initArr))
+	fmt.Printf("Light2 (100) = %v\n",CountArr(initArr2))
 }
