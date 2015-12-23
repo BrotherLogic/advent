@@ -5,32 +5,64 @@ import "fmt"
 import "os"
 import "strings"
 
-func ReverseMapping(mapper map[string][]string, target string) int {
-	pass := 1
+func ReverseMap(mapper map[string][]string) map[string][]string {
+	var nmap map[string][]string
+	nmap = make(map[string][]string)
 
-	var init map[string]int
-	init = make(map[string]int)
-	init["e"] = 1
-	
-	searching := true
-	for searching {
-		var newval map[string]int
-		newval = make(map[string]int)
-
-		for val, _ := range init {
-			nmap := BuildMapping(mapper, 0, val)
-			for nval, _ := range nmap {
-				if nval == target {
-					return pass
-				}
-				Add(newval, nval)
+	for key, val := range mapper {
+		for i := 0 ; i < len(val) ; i++ {
+			if _, ok := nmap[val[i]]; ok {
+				nmap[val[i]] = append(nmap[val[i]], key)
+			} else {
+				nmap[val[i]] = make([]string,0)
+				nmap[val[i]] = append(nmap[val[i]], key)
 			}
 		}
-		init = newval
-		pass++
+	}
+	return nmap
+}
+
+func ReverseMapping(mapper map[string][]string, target string, steps int) int {
+	best := 9999
+	
+	if target == "e" {
+		return steps
 	}
 
-	return 0
+	if strings.Contains(target,"e") {
+		return best
+	}
+	
+	for key, val := range mapper {
+		strs := strings.Split(target,key)
+		for i:= 0 ; i < len(strs)-1 ; i++ {
+			str := ""
+			nfirst := true
+			for j := 0 ; j <= i ; j++ {
+				if nfirst {
+					str += strs[j]
+					nfirst = false
+				} else {
+					str += key + strs[j]
+				}
+			}
+			for k := 0 ; k < len(val) ; k++ {
+				nstr := str + val[k]
+				first := true
+				for l := i+1 ; l < len(strs) ; l++ {
+					if first {
+						nstr += strs[l]
+						first = false
+					} else {
+						nstr += key + strs[l]
+					}
+				}
+				best = Min(best,ReverseMapping(mapper, nstr, steps +1))
+			}
+		}
+	}
+	
+	return best
 }
 
 func Add(mapper map[string]int, str string) map[string]int {
@@ -96,7 +128,7 @@ func daynineteen() {
 			}
 		} else if len(text) > 2 {
 			fmt.Printf("Answer = %v\n", len(BuildMapping(mapper, 0, text)))
-			fmt.Printf("Steps = %v\n", ReverseMapping(mapper, text))
+			fmt.Printf("Steps = %v\n", ReverseMapping(mapper, text, 0))
 		}
 	}
 }

@@ -24,12 +24,12 @@ func TestDay19P1(t *testing.T) {
 		t.Errorf("Poor second mapping %v,%v\n", len(mapping2), mapping2)
 	}
 
-	min_steps1 := ReverseMapping(tester,"HOH")
+	min_steps1 := ReverseMapping(ReverseMap(tester),"HOH",0)
 	if min_steps1 != 3 {
 		t.Errorf("Bad mapping %v\n", min_steps1)
 	}
 
-	min_steps2 := ReverseMapping(tester,"HOHOHO")
+	min_steps2 := ReverseMapping(ReverseMap(tester),"HOHOHO",0)
 	if min_steps2 != 6 {
 		t.Errorf("Bad mapping 2 %v\n", min_steps2)
 	}
