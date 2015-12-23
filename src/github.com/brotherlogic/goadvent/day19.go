@@ -5,6 +5,34 @@ import "fmt"
 import "os"
 import "strings"
 
+func ReverseMapping(mapper map[string][]string, target string) int {
+	pass := 1
+
+	var init map[string]int
+	init = make(map[string]int)
+	init["e"] = 1
+	
+	searching := true
+	for searching {
+		var newval map[string]int
+		newval = make(map[string]int)
+
+		for val, _ := range init {
+			nmap := BuildMapping(mapper, 0, val)
+			for nval, _ := range nmap {
+				if nval == target {
+					return pass
+				}
+				Add(newval, nval)
+			}
+		}
+		init = newval
+		pass++
+	}
+
+	return 0
+}
+
 func Add(mapper map[string]int, str string) map[string]int {
 	if _, ok := mapper[str]; ok {
 		mapper[str] += 1
@@ -68,6 +96,7 @@ func daynineteen() {
 			}
 		} else if len(text) > 2 {
 			fmt.Printf("Answer = %v\n", len(BuildMapping(mapper, 0, text)))
+			fmt.Printf("Steps = %v\n", ReverseMapping(mapper, text))
 		}
 	}
 }
