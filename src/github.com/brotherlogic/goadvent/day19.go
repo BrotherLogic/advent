@@ -220,6 +220,7 @@ func daynineteen() {
 				found := ReverseMapping2(ReverseMap(mapper), text, 0)
 				if found < 5000 {
 					fmt.Printf("Steps = %v\n", found)
+					break
 				}
 			}
 		}
