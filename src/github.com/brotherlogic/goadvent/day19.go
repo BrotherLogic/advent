@@ -3,7 +3,20 @@ package main
 import "bufio"
 import "fmt"
 import "os"
+import "math/rand"
+import "sort"
 import "strings"
+import "time"
+
+func ShuffleStrings(slc []string) {
+	rand.Seed(time.Now().UnixNano())
+	N := len(slc)
+	for i := 0; i < N; i++ {
+		// choose index uniformly in [i, N-1]
+		r := i + rand.Intn(N-i)
+		slc[r], slc[i] = slc[i], slc[r]
+	}
+}
 
 func ReverseMap(mapper map[string][]string) map[string][]string {
 	var nmap map[string][]string
@@ -22,7 +35,72 @@ func ReverseMap(mapper map[string][]string) map[string][]string {
 	return nmap
 }
 
+type ByLength []string
+
+func (s ByLength) Len() int {
+	return len(s)
+}
+
+func (s ByLength) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByLength) Less(i, j int) bool {
+	return len(s[i]) < len(s[j])
+}
+
+func ReverseMapping2(mapper map[string][]string, target string, steps int) int {
+	
+	best := 99999
+	
+	var keys []string
+	for k := range mapper {
+		keys = append(keys,k)
+	}
+
+	if target == "e" {
+		return steps
+	}
+	
+	//sort.Sort(ByLength(keys))
+	ShuffleStrings(keys)
+
+//	fmt.Printf("Starting %v\n", keys)
+	ntarget := target
+	for ntarget != "e" {
+		breaker := false
+		for _, key := range keys {
+			if strings.Contains(ntarget, key) {
+//				fmt.Printf("HERE = %v with %v => %v, %v\n",ntarget, key, mapper[key], steps)
+				breaker = true
+				ntarget = strings.Replace(ntarget,key,mapper[key][0], 1)
+				steps++
+			}
+		}
+
+		if !breaker || steps > 1000 {
+//			fmt.Printf("Could not find %v,%v,%v\n", breaker, steps, ntarget)
+			return 5555
+		}
+	}
+
+	return steps
+		
+	for _, key := range keys {
+		if strings.Contains(target, key) {
+			arr := mapper[key]
+			sort.Sort(ByLength(arr))
+
+			repl := strings.Replace(target, key, arr[0], 1)
+			best = Min(best,ReverseMapping2(mapper, repl, steps+1))
+		}
+	}
+
+	return best
+}
+
 func ReverseMapping(mapper map[string][]string, target string, steps int) int {
+
 	best := 9999
 	
 	if target == "e" {
@@ -32,8 +110,15 @@ func ReverseMapping(mapper map[string][]string, target string, steps int) int {
 	if strings.Contains(target,"e") {
 		return best
 	}
-	
-	for key, val := range mapper {
+
+	var keys []string
+	for k := range mapper {
+		keys = append(keys,k)
+	}
+
+	sort.Sort(ByLength(keys))
+	for _, key := range keys {
+		val := mapper[key]
 		strs := strings.Split(target,key)
 		for i:= 0 ; i < len(strs)-1 ; i++ {
 			str := ""
@@ -57,7 +142,10 @@ func ReverseMapping(mapper map[string][]string, target string, steps int) int {
 						nstr += key + strs[l]
 					}
 				}
-				best = Min(best,ReverseMapping(mapper, nstr, steps +1))
+				
+				if len(nstr) <= len(target) {
+					best = Min(best,ReverseMapping(mapper, nstr, steps +1))
+				} 
 			}
 		}
 	}
@@ -128,7 +216,12 @@ func daynineteen() {
 			}
 		} else if len(text) > 2 {
 			fmt.Printf("Answer = %v\n", len(BuildMapping(mapper, 0, text)))
-			fmt.Printf("Steps = %v\n", ReverseMapping(mapper, text, 0))
+			for i := 0 ; i < 20000 ; i++ {
+				found := ReverseMapping2(ReverseMap(mapper), text, 0)
+				if found < 5000 {
+					fmt.Printf("Steps = %v\n", found)
+				}
+			}
 		}
 	}
 }
