@@ -1,14 +1,12 @@
 package main
 
 import "fmt"
-import "math"
 
 func ComputePresents(val int) int {
 	count := 0
-	tval := int(math.Sqrt(float64(val)))
-	for j := val ; j > tval ; j-- {
+	for j := val ; j > 0 ; j-- {
 		if val % j == 0 {
-			count += j*10 + 10*(val/j)
+			count += j*10
 		}
 	}
 	return count
