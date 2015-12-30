@@ -17,6 +17,30 @@ func ComputeArrangement(mainarr [][]int) (int,int){
 	return len(mainarr[0]), Product(mainarr[0])
 }
 
+func Search(sofar []int, numbers []int, pointer int, matchv int, totalc int) int {
+	best1 := -1
+	if len(sofar) == totalc {
+		if Sum(sofar) == matchv {
+			return Product(sofar)
+		}
+	} else {
+		for i := pointer ; i < len(numbers) ; i++ {
+			sofar = append(sofar,numbers[i])
+			newv := Search(sofar, numbers, i+1, matchv, totalc)
+			if newv > 0 {
+				if best1 == -1 {
+					best1 = newv
+				} else {
+					best1 = Min(best1,newv)
+				}
+			}
+			sofar = sofar[0:len(sofar)-1]
+		}
+	}
+
+	return best1
+}
+
 func Build(mainarr [][]int, numbers []int, pointer int, matchv int) (int,int) {
 	best1 := 999999
 	best2 := 999999
@@ -30,7 +54,7 @@ func Build(mainarr [][]int, numbers []int, pointer int, matchv int) (int,int) {
 		}
 	} else {
 		for i := 0 ; i < len(mainarr) ; i++ {
-			if Sum(mainarr[i]) + numbers[pointer] <= matchv {
+			if (i == 0 || len(mainarr[i]) < len(mainarr[i-1])) && Sum(mainarr[i]) + numbers[pointer] <= matchv {
 				mainarr[i] = append(mainarr[i],numbers[pointer])
 				val1, val2 := Build(mainarr, numbers, pointer+1, matchv)
 				if val1 < best1 {
@@ -60,7 +84,29 @@ func ProcNumbers(numbers []int, gap int) int{
 	_,val2 := Build(arr, numbers, 0, match)
 	return val2
 }
-	
+
+func SimpleProc(numbers []int, gap int) int {
+	sofar := make([]int, 0)
+	init := 1
+	found := false
+	match := Sum(numbers)/gap
+	newv := -1
+	for !found {
+		tempv := Search(sofar, numbers, 0, match, init)
+		if tempv > 0 && (newv == -1 || tempv < newv) {
+			newv = tempv
+			found = true
+		}
+
+		if init > 5 {
+			found = true
+		}
+		
+		init++
+	}
+
+	return newv
+}
  
 func daytwentyfour() {
 	file,_ := os.Open("input-day24")
@@ -73,5 +119,6 @@ func daytwentyfour() {
 		numbers = append(numbers,intv)
 	}
 
-	fmt.Printf("Result = %v\n",ProcNumbers(numbers,3))
+	fmt.Printf("Result = %v\n",SimpleProc(numbers,3))
+	fmt.Printf("Result = %v\n",SimpleProc(numbers,4))
 }
