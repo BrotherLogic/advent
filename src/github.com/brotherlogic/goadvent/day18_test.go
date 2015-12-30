@@ -1,6 +1,5 @@
 package main
 
-import "fmt"
 import "testing"
 
 func TestDay18P1(t *testing.T) {
