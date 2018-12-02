@@ -4,4 +4,4 @@ go:
   - 1.5
 
 after_success:
-- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then $GOPATH/bin/goadvent; fi
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then $GOPATH/bin/advent; fi
