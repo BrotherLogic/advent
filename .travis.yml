@@ -1,7 +1,7 @@
 language: go
 
 go:
-  - 1.5
+  - 1.9
 
 after_success:
 - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then $GOPATH/bin/advent; fi
