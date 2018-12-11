@@ -6,4 +6,5 @@ func main() {
 	solveDay3("data/day3.txt")
 	solveDay4Part1("data/day4.txt")
 	solveDay5("data/day5.txt")
+	solveDay8("data/day8.txt")
 }
