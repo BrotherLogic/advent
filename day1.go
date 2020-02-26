@@ -8,34 +8,20 @@ import (
 	"strconv"
 )
 
-func sum(arr []int) int {
-	val := 0
-	for _, v := range arr {
-		val += v
+func computeSuperFuel(mass int) int {
+	sum := -mass
+	for mass > 0 {
+		sum += mass
+		mass = computeFuel(mass)
 	}
-	return val
+	return sum
 }
 
-func lookForTwo(arr []int) int {
-	counts := make(map[int]int)
-	counts[0] = 1
-	cVal := 0
-	for true {
-		for _, v := range arr {
-			cVal += v
-			if counts[cVal] == 1 {
-				return cVal
-			} else {
-				counts[cVal]++
-			}
-		}
-	}
-
-	return -1
+func computeFuel(mass int) int {
+	return mass/3 - 2
 }
 
-func solveDay1Part1(file string) {
-	arr := []int{}
+func runDay1(file string) {
 	f, err := os.Open(file)
 	if err != nil {
 		log.Fatal(err)
@@ -43,18 +29,21 @@ func solveDay1Part1(file string) {
 	defer f.Close()
 
 	scanner := bufio.NewScanner(f)
+	sum := 0
+	superSum := 0
 	for scanner.Scan() {
 		i, err := strconv.Atoi(scanner.Text())
 		if err != nil {
 			log.Fatal(err)
 		}
-		arr = append(arr, i)
+		sum += computeFuel(i)
+		superSum += computeSuperFuel(i)
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Day 1 [1]. %v\n", sum(arr))
-	fmt.Printf("Day 1 [2]. %v\n", lookForTwo(arr))
+	fmt.Printf("Day 1, Part 1 = %v\n", sum)
+	fmt.Printf("Day 1, Part 2 = %v\n", superSum)
 }
