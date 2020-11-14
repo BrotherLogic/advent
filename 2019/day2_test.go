@@ -19,7 +19,7 @@ func TestOpCode1(t *testing.T) {
 	for _, test := range tests {
 		ti := make([]int, len(test.input))
 		copy(ti, test.input)
-		result := runOpCode1(test.input)
+		result := RunOpCode1(test.input)
 		if result != test.output {
 			t.Errorf("Bad run: %v led to %v, should be %v", ti, result, test.output)
 		}
