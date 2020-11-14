@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
@@ -13,6 +15,8 @@ import (
 func main() {
 	a2019.RunDay1("data/2019-1")
 	runDay2()
+	runDay3()
+	runDay4()
 }
 
 func loadProgram(file string) []int {
@@ -54,5 +58,40 @@ func runDay2() {
 			}
 		}
 	}
+}
 
+func runDay3() {
+	file, err := os.Open("data/2019-3-1.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	scanner.Scan()
+	line1 := strings.Split(scanner.Text(), ",")
+	scanner.Scan()
+	line2 := strings.Split(scanner.Text(), ",")
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Day3-1: %v\n", a2019.ComputeDistance(line1, line2))
+	fmt.Printf("Day3-2: %v\n", a2019.ComputeLen(line1, line2))
+}
+
+func runDay4() {
+	count := 0
+	count2 := 0
+	for i := 134792; i <= 675810; i++ {
+		if a2019.Valid(i) {
+			count++
+		}
+		if a2019.TightValid(i) {
+			count2++
+		}
+	}
+	fmt.Printf("Day4-1: %v\n", count)
+	fmt.Printf("Day4-2: %v\n", count2)
 }
