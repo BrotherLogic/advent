@@ -1,4 +1,4 @@
-package main
+package a2019
 
 import (
 	"bufio"
@@ -21,7 +21,7 @@ func computeFuel(mass int) int {
 	return mass/3 - 2
 }
 
-func runDay1(file string) {
+func RunDay1(file string) {
 	f, err := os.Open(file)
 	if err != nil {
 		log.Fatal(err)
