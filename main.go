@@ -17,6 +17,7 @@ func main() {
 	runDay2()
 	runDay3()
 	runDay4()
+	runDay5()
 }
 
 func loadProgram(file string) []int {
@@ -94,4 +95,14 @@ func runDay4() {
 	}
 	fmt.Printf("Day4-1: %v\n", count)
 	fmt.Printf("Day4-2: %v\n", count2)
+}
+
+func runDay5() {
+	program := loadProgram("data/2019-5-1.txt")
+	result := a2019.ProcessOpCode2(program, 1)
+	fmt.Printf("Day5-1: %v\n", result)
+
+	program = loadProgram("data/2019-5-1.txt")
+	result = a2019.ProcessOpCode2(program, 5)
+	fmt.Printf("Day5-2: %v\n", result)
 }

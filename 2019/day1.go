@@ -21,6 +21,7 @@ func computeFuel(mass int) int {
 	return mass/3 - 2
 }
 
+//RunDay1 runs the day1 code
 func RunDay1(file string) {
 	f, err := os.Open(file)
 	if err != nil {
