@@ -18,6 +18,7 @@ func main() {
 	runDay3()
 	runDay4()
 	runDay5()
+	runDay6()
 }
 
 func loadProgram(file string) []int {
@@ -36,6 +37,23 @@ func loadProgram(file string) []int {
 		program = append(program, int(i))
 	}
 	return program
+}
+
+func readLines(fileIn string) []string {
+	file, err := os.Open(fileIn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	lines := []string{}
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	return lines
 }
 
 func runDay2() {
@@ -105,4 +123,11 @@ func runDay5() {
 	program = loadProgram("data/2019-5-1.txt")
 	result = a2019.ProcessOpCode2(program, 5)
 	fmt.Printf("Day5-2: %v\n", result)
+}
+
+func runDay6() {
+	lines := readLines("data/2019-6-1.txt")
+	result, span := a2019.RunOrbits(lines)
+	fmt.Printf("Day6-1: %v\n", result)
+	fmt.Printf("Day6-2: %v\n", span)
 }
