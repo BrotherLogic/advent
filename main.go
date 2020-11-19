@@ -8,17 +8,23 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	a2019 "github.com/brotherlogic/advent/2019"
 )
 
 func main() {
+	t := time.Now()
 	a2019.RunDay1("data/2019-1")
 	runDay2()
 	runDay3()
 	runDay4()
 	runDay5()
 	runDay6()
+	runDay7()
+	runDay8()
+	runDay9()
+	fmt.Printf("Complete in %v", time.Now().Sub(t))
 }
 
 func loadProgram(file string) []int {
@@ -37,6 +43,21 @@ func loadProgram(file string) []int {
 		program = append(program, int(i))
 	}
 	return program
+}
+
+func loadNums(file string) []int {
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatalf("Cannot read data: %v", err)
+	}
+
+	nums := []int{}
+	for _, run := range string(data) {
+		num, _ := strconv.ParseInt(string(run), 10, 32)
+		nums = append(nums, int(num))
+	}
+
+	return nums
 }
 
 func readLines(fileIn string) []string {
@@ -117,11 +138,11 @@ func runDay4() {
 
 func runDay5() {
 	program := loadProgram("data/2019-5-1.txt")
-	result := a2019.ProcessOpCode2(program, 1)
+	result, _, _, _ := a2019.ProcessOpCode2(program, 0, []int{1}, 0, 0)
 	fmt.Printf("Day5-1: %v\n", result)
 
 	program = loadProgram("data/2019-5-1.txt")
-	result = a2019.ProcessOpCode2(program, 5)
+	result, _, _, _ = a2019.ProcessOpCode2(program, 0, []int{5}, 0, 0)
 	fmt.Printf("Day5-2: %v\n", result)
 }
 
@@ -130,4 +151,27 @@ func runDay6() {
 	result, span := a2019.RunOrbits(lines)
 	fmt.Printf("Day6-1: %v\n", result)
 	fmt.Printf("Day6-2: %v\n", span)
+}
+
+func runDay7() {
+	program := loadProgram("data/2019-7-1.txt")
+	result := a2019.FindMax(program, []int{0, 1, 2, 3, 4})
+	result2 := a2019.FindMax(program, []int{5, 6, 7, 8, 9})
+	fmt.Printf("Day7-1: %v\n", result)
+	fmt.Printf("Day7-2: %v\n", result2)
+}
+
+func runDay8() {
+	nums := loadNums("data/2019-8-1.txt")
+	result := a2019.FindLayer(nums, 25, 6)
+	fmt.Printf("Day8-1: %v\n", result)
+	a2019.PrintGraph(nums, 25, 6)
+}
+
+func runDay9() {
+	program := loadProgram("data/2019-9-1.txt")
+	output := a2019.RunFull(program)
+	fmt.Printf("Day9-1: %v\n", output)
+	output2 := a2019.RunFull2(program)
+	fmt.Printf("Day9-2: %v\n", output2)
 }
