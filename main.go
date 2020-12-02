@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -13,17 +14,27 @@ import (
 	a2019 "github.com/brotherlogic/advent/2019"
 )
 
+var (
+	year = flag.Int("year", 2020, "The year to run")
+)
+
 func main() {
 	t := time.Now()
-	a2019.RunDay1("data/2019-1")
-	runDay2()
-	runDay3()
-	runDay4()
-	runDay5()
-	runDay6()
-	runDay7()
-	runDay8()
-	runDay9()
+	switch *year {
+	case 2019:
+		a2019.RunDay1("data/2019-1")
+		runDay2()
+		runDay3()
+		runDay4()
+		runDay5()
+		runDay6()
+		runDay7()
+		runDay8()
+		runDay9()
+	case 2020:
+		run2020day1()
+		run2020day2()
+	}
 	fmt.Printf("Complete in %v", time.Now().Sub(t))
 }
 
@@ -46,6 +57,18 @@ func loadProgram(file string) []int {
 }
 
 func loadNums(file string) []int {
+	lines := readLines(file)
+
+	nums := []int{}
+	for _, run := range lines {
+		num, _ := strconv.ParseInt(string(run), 10, 32)
+		nums = append(nums, int(num))
+	}
+
+	return nums
+}
+
+func loadListNums(file string) []int {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatalf("Cannot read data: %v", err)

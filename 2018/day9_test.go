@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-var day8Table = []struct {
+var day9Table = []struct {
 	in  string
 	out int
 }{
@@ -14,8 +14,8 @@ var day8Table = []struct {
 	{"30 players; last marble is worth 5807 points", 37305},
 }
 
-func TestDay8(t *testing.T) {
-	for _, tt := range day8Table {
+func TestDay9(t *testing.T) {
+	for _, tt := range day9Table {
 		solve, _ := runGame(tt.in, -1)
 		if solve != tt.out {
 			t.Fatalf("Game was wrong: %v (%v)", solve, tt.out)
