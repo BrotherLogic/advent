@@ -26,3 +26,11 @@ func run2020day3() {
 	v2 := a2020.CountAllSlopes(lines)
 	fmt.Printf("Day3-2: %v\n", v2)
 }
+
+func run2020day4() {
+	lines := readLines("data/2020-4-1.txt")
+	v1 := a2020.CountValid1(lines)
+	fmt.Printf("Day4-1: %v\n", v1)
+	v2 := a2020.CountValid2(lines)
+	fmt.Printf("Day4-2: %v\n", v2)
+}
