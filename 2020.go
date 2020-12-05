@@ -34,3 +34,10 @@ func run2020day4() {
 	v2 := a2020.CountValid2(lines)
 	fmt.Printf("Day4-2: %v\n", v2)
 }
+
+func run2020day5() {
+	lines := readLines("data/2020-5-1.txt")
+	v1, mine := a2020.GetHighestSeat(lines)
+	fmt.Printf("Day5-1: %v\n", v1)
+	fmt.Printf("Day5-2: %v\n", mine)
+}
