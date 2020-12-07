@@ -41,3 +41,10 @@ func run2020day5() {
 	fmt.Printf("Day5-1: %v\n", v1)
 	fmt.Printf("Day5-2: %v\n", mine)
 }
+
+func run2020day6() {
+	lines := readLines("data/2020-6-1.txt")
+	v1, v2 := a2020.CountLines(lines)
+	fmt.Printf("Day6-1: %v\n", v1)
+	fmt.Printf("Day6-2: %v\n", v2)
+}
