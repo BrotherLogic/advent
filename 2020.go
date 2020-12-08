@@ -48,3 +48,11 @@ func run2020day6() {
 	fmt.Printf("Day6-1: %v\n", v1)
 	fmt.Printf("Day6-2: %v\n", v2)
 }
+
+func run2020day7() {
+	lines := readLines("data/2020-7-1.txt")
+	count := a2020.Derive(lines, "shiny gold")
+	fmt.Printf("Day7-1: %v\n", count)
+	deriv := a2020.Delve(lines, "shiny gold")
+	fmt.Printf("Day7-2: %v\n", deriv)
+}
