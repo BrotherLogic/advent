@@ -56,3 +56,11 @@ func run2020day7() {
 	deriv := a2020.Delve(lines, "shiny gold")
 	fmt.Printf("Day7-2: %v\n", deriv)
 }
+
+func run2020day8() {
+	code := readLines("data/2020-8-1.txt")
+	acc := a2020.RunCode(code)
+	fmt.Printf("Day8-1: %v\n", acc)
+	acc = a2020.FixAndRunCode(code)
+	fmt.Printf("Day8-2: %v\n", acc)
+}
