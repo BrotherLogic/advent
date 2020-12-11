@@ -64,3 +64,19 @@ func run2020day8() {
 	acc = a2020.FixAndRunCode(code)
 	fmt.Printf("Day8-2: %v\n", acc)
 }
+
+func run2020day9() {
+	lines := loadBigNums("data/2020-9-1.txt")
+	first := a2020.FindFirst(lines, 25)
+	fmt.Printf("Day9-1: %v\n", first)
+	contMin, contMax := a2020.FindContiguous(lines, first)
+	fmt.Printf("Day9-2: %v\n", contMin+contMax)
+}
+
+func run2020day10() {
+	lines := loadNums("data/2020-10-1.txt")
+	found := a2020.FindDiff(lines, 1, 3)
+	fmt.Printf("Day10-1: %v\n", found)
+	travel := a2020.Travel(lines)
+	fmt.Printf("Day10-2: %v\n", travel)
+}
