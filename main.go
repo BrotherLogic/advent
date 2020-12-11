@@ -40,6 +40,8 @@ func main() {
 		run2020day6()
 		run2020day7()
 		run2020day8()
+		run2020day9()
+		run2020day10()
 	}
 	fmt.Printf("Complete in %v", time.Now().Sub(t))
 }
@@ -53,7 +55,7 @@ func loadProgram(file string) []int {
 	program := []int{}
 	elems := strings.Split(string(data), ",")
 	for v, elem := range elems {
-		i, err := strconv.ParseInt(elem, 10, 32)
+		i, err := strconv.ParseInt(elem, 10, 64)
 		if err != nil {
 			log.Fatalf("Bad conv at %v: %v", v, err)
 		}
@@ -69,6 +71,18 @@ func loadNums(file string) []int {
 	for _, run := range lines {
 		num, _ := strconv.ParseInt(string(run), 10, 32)
 		nums = append(nums, int(num))
+	}
+
+	return nums
+}
+
+func loadBigNums(file string) []int64 {
+	lines := readLines(file)
+
+	nums := []int64{}
+	for _, run := range lines {
+		num, _ := strconv.ParseInt(string(run), 10, 64)
+		nums = append(nums, num)
 	}
 
 	return nums
