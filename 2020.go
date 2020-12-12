@@ -88,3 +88,11 @@ func run2020day11() {
 	seats2 := a2020.CountAndRunSeats(lines, 1)
 	fmt.Printf("Day11-2: %v\n", seats2)
 }
+
+func run2020day12() {
+	lines := readLines("data/2020-12-1.txt")
+	dist := a2020.MakeMoves(lines)
+	fmt.Printf("Day12-1: %v\n", dist)
+	wp := a2020.MoveWaypoint(lines)
+	fmt.Printf("Day12-2: %v\n", wp)
+}

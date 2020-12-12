@@ -22,7 +22,7 @@ func TestSeats(t *testing.T) {
 	}
 
 	res2 := CountAndRunSeats(lines, 1)
-	if res != 26 {
+	if res2 != 26 {
 		t.Errorf("Bad seats2: %v", res2)
 	}
 }
