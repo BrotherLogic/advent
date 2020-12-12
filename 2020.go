@@ -80,3 +80,11 @@ func run2020day10() {
 	travel := a2020.Travel(lines)
 	fmt.Printf("Day10-2: %v\n", travel)
 }
+
+func run2020day11() {
+	lines := readLines("data/2020-11-1.txt")
+	seats := a2020.CountAndRunSeats(lines, 0)
+	fmt.Printf("Day11-1: %v\n", seats)
+	seats2 := a2020.CountAndRunSeats(lines, 1)
+	fmt.Printf("Day11-2: %v\n", seats2)
+}
