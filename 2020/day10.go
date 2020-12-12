@@ -23,6 +23,14 @@ func minint(a, b int) int {
 	return b
 }
 
+func maxint(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
 //Travel part 2
 func Travel(nums []int) int {
 	cp := make([]int, len(nums))
