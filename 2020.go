@@ -96,3 +96,11 @@ func run2020day12() {
 	wp := a2020.MoveWaypoint(lines)
 	fmt.Printf("Day12-2: %v\n", wp)
 }
+
+func run2020day13() {
+	lines := readLines("data/2020-13-1.txt")
+	tim := a2020.GetEarliestTime(lines)
+	fmt.Printf("Day13-1: %v\n", tim)
+	t2 := a2020.GetAlignment(lines[1])
+	fmt.Printf("Day13-2: %v\n", t2)
+}
