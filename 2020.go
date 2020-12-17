@@ -104,3 +104,11 @@ func run2020day13() {
 	t2 := a2020.GetAlignment(lines[1])
 	fmt.Printf("Day13-2: %v\n", t2)
 }
+
+func run2020day14() {
+	lines := readLines("data/2020-14-1.txt")
+	tim := a2020.RunMask(lines)
+	fmt.Printf("Day14-1: %v\n", tim)
+	tim2 := a2020.RunMask2(lines)
+	fmt.Printf("Day14-2: %v\n", tim2)
+}
