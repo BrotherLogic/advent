@@ -112,3 +112,10 @@ func run2020day14() {
 	tim2 := a2020.RunMask2(lines)
 	fmt.Printf("Day14-2: %v\n", tim2)
 }
+
+func run2020day15() {
+	res := a2020.RunGame([]int{0, 14, 6, 20, 1, 4}, 2020)
+	fmt.Printf("Day15-1: %v\n", res)
+	res2 := a2020.RunGame([]int{0, 14, 6, 20, 1, 4}, 30000000)
+	fmt.Printf("Day15-2: %v\n", res2)
+}

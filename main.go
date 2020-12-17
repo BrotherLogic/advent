@@ -46,6 +46,7 @@ func main() {
 		run2020day12()
 		run2020day13()
 		run2020day14()
+		run2020day15()
 	}
 	fmt.Printf("Complete in %v", time.Now().Sub(t))
 }
