@@ -119,3 +119,19 @@ func run2020day15() {
 	res2 := a2020.RunGame([]int{0, 14, 6, 20, 1, 4}, 30000000)
 	fmt.Printf("Day15-2: %v\n", res2)
 }
+
+func run2020day16() {
+	lines := readLines("data/2020-16-1.txt")
+	res, _ := a2020.FindTicket(lines)
+	fmt.Printf("Day16-1: %v\n", res)
+	res2 := a2020.BuildTicket(lines, "depart")
+	fmt.Printf("Day16-2: %v\n", res2)
+}
+
+func run2020day17() {
+	lines := readLines("data/2020-17-1.txt")
+	res := a2020.RunLife(lines, 6)
+	fmt.Printf("Day17-1: %v\n", res)
+	res2 := a2020.RunLife2(lines, 6)
+	fmt.Printf("Day17-2: %v\n", res2)
+}
