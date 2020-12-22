@@ -135,3 +135,11 @@ func run2020day17() {
 	res2 := a2020.RunLife2(lines, 6)
 	fmt.Printf("Day17-2: %v\n", res2)
 }
+
+func run2020day18() {
+	lines := readLines("data/2020-18-1.txt")
+	res := a2020.RunSum(lines, map[string]int{"*": 1, "+": 1, "(": 0, ")": 0})
+	fmt.Printf("Day18-1: %v\n", res)
+	res2 := a2020.RunSum(lines, map[string]int{"*": 1, "+": 2, "(": 0, ")": 0})
+	fmt.Printf("Day18-2: %v\n", res2)
+}
