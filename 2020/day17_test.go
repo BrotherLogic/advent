@@ -14,7 +14,7 @@ func TestLife1(t *testing.T) {
 		t.Errorf("Bad run of lie: %v", res)
 	}
 
-	res2 := RunMoreLife(lines, 6)
+	res2 := RunLife2(lines, 6)
 	if res2 != 848 {
 		t.Errorf("Bad run: %v", res2)
 	}

@@ -249,7 +249,7 @@ func printMap(m map[int]map[int]map[int]bool) {
 //RunLife runs the life iteration
 func RunLife(lines []string, cycles int) int {
 	m := buildMap(lines)
-	printMap(m)
+	//printMap(m)
 	for i := 0; i < cycles; i++ {
 		m2 := runCycle(m)
 		m = m2
